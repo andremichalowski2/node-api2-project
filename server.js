@@ -1,15 +1,11 @@
-const express = require("express"); // import express
-const server = express(); //instantiate server
-server.use(express.json()); //configure server
+//IMPORTS
+const express = require('express')
+const server = express();
+server.use(express.json());
+// import router once made
 
-server.get("/", (req, res) => {
-  // test endpoint
-  res.send("Test endpoint");
-});
+//ROUTES
+// insert router root here
+server.use('/', (req, res) => res.send("API is running!"));
 
-const port = 3000; // port and listening for requests
-server.listen(port, () => {
-  console.log("Server running on localhost:3000");
-});
-
-module.export = server; // export statement
+module.export = server;
