@@ -7,12 +7,12 @@ Use `Node.js` and `Express` to build an API that performs _CRUD_ operations on `
 ## Instructions
 
 ### Task 1: Project Setup
-
-- import this repository into your account
+<!-- - [x] Initial commit -->
+<!-- - import this repository into your account
 - clone **your copy** of this repository.
 - **CD into the folder** where you cloned the repository.
 - Type `npm install` to download all dependencies.
-- To start the server, type `npm run server` from the root folder (where the _package.json_ file is). The server is configured to restart automatically as you make changes.
+- To start the server, type `npm run server` from the root folder (where the _package.json_ file is). The server is configured to restart automatically as you make changes. -->
 
 ### Task 2: Minimum Viable Product
 
@@ -32,6 +32,10 @@ Configure the API to handle to the following routes:
 | GET    | /api/posts/:id/comments | Returns an array of all the comment objects associated with the post with the specified id.                                                                                 |
 | DELETE | /api/posts/:id          | Removes the post with the specified id and returns the **deleted post object**. You may need to make additional calls to the database in order to satisfy this requirement. |
 | PUT    | /api/posts/:id          | Updates the post with the specified `id` using data from the `request body`. Returns the modified document, **NOT the original**.                                           |
+
+-----------------------------------------------------------------
+/////////////////////////////////////////////////////////////////
+-----------------------------------------------------------------
 
 #### Endpoint Specifications
 
@@ -53,6 +57,8 @@ When the client makes a `POST` request to `/api/posts`:
   - cancel the request.
   - respond with HTTP status code `500` (Server Error).
   - return the following JSON object: `{ error: "There was an error while saving the post to the database" }`.
+
+----------------------------------------------------------------------
 
 When the client makes a `POST` request to `/api/posts/:id/comments`:
 
@@ -78,12 +84,16 @@ When the client makes a `POST` request to `/api/posts/:id/comments`:
   - respond with HTTP status code `500` (Server Error).
   - return the following JSON object: `{ error: "There was an error while saving the comment to the database" }`.
 
+/////////////////////////////////////////////////////////////////
+
 When the client makes a `GET` request to `/api/posts`:
 
 - If there's an error in retrieving the _posts_ from the database:
   - cancel the request.
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The posts information could not be retrieved." }`.
+
+----------------------------------------------------------------------
 
 When the client makes a `GET` request to `/api/posts/:id`:
 
@@ -97,6 +107,8 @@ When the client makes a `GET` request to `/api/posts/:id`:
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The post information could not be retrieved." }`.
 
+----------------------------------------------------------------------
+
 When the client makes a `GET` request to `/api/posts/:id/comments`:
 
 - If the _post_ with the specified `id` is not found:
@@ -109,6 +121,8 @@ When the client makes a `GET` request to `/api/posts/:id/comments`:
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The comments information could not be retrieved." }`.
 
+/////////////////////////////////////////////////////////////////
+
 When the client makes a `DELETE` request to `/api/posts/:id`:
 
 - If the _post_ with the specified `id` is not found:
@@ -120,6 +134,8 @@ When the client makes a `DELETE` request to `/api/posts/:id`:
   - cancel the request.
   - respond with HTTP status code `500`.
   - return the following JSON object: `{ error: "The post could not be removed" }`.
+
+/////////////////////////////////////////////////////////////////
 
 When the client makes a `PUT` request to `/api/posts/:id`:
 
@@ -146,6 +162,10 @@ When the client makes a `PUT` request to `/api/posts/:id`:
   - return HTTP status code `200` (OK).
   - return the newly updated _post_.
   
+----------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////
+----------------------------------------------------------------------
+
 ### Database Persistence Helpers
 
 The `data` folder contains a database populated with test `posts`.
