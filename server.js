@@ -1,11 +1,12 @@
 //IMPORTS
-const express = require('express')
-const server = express();
-server.use(express.json());
-// import router once made
+const express = require('express') //import
+const server = express(); // instantiate
+server.use(express.json()); // configure
+const postRoutes = require("./posts/postRoutes"); // routes imp
+
 
 //ROUTES
-// insert router root here
-server.use('/', (req, res) => res.send("API is running!"));
+server.use("/api/posts", postRoutes); // root for post routes
+server.use('/', (req, res) => res.send("API is running!")); //test 
 
-module.export = server;
+module.exports = server;
