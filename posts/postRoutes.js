@@ -164,4 +164,35 @@ router.delete('/:id', async (req, res) => {
 	}
 });
 
+//-----------------------------------------------------------------------------------------//
+
+//PUT (POST BY ID)
+router.put('/:id', async (req, res) => {
+	const { id } = req.params;
+	const body = req.body;
+	if (!body.title || !body.contents) {
+		res
+			.status(400)
+			.json({ message: 'Please provide title and contents for the post.' });
+	} else {
+		const post = await db.findById(id);
+		if (post.length > 0) {
+			try {
+				const updatedPost = await db.update(id, body);
+				const post = await db.findById(id);
+				res.status(200).json(post);
+			} catch (error) {
+				console.log(error);
+				res
+					.status(500)
+					.json({ message: 'The post information could not be modified.' });
+			}
+		} else {
+			res
+				.status(404)
+				.json({ message: 'The post with the specified ID does not exist.' });
+		}
+	}
+});
+
 module.exports = router;
