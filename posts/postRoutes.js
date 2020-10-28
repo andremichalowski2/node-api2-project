@@ -195,4 +195,10 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
+// router.get('/', (req, res) => {...}
+// router.get('/:id', (req, res) => {...}
+// router.post('/', (req, res) => {...}
+// router.delete('/:id', (req, res) => {...}
+// router.put('/:id', (req, res) => {...}
+
 module.exports = router;
