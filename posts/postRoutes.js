@@ -143,5 +143,25 @@ router.get('/:id/comments', async (req, res) => {
 	}
 });
 
+//-----------------------------------------------------------------------------------------//
+
+//DELETE (POST BY ID)
+router.delete('/:id', async (req, res) => {
+	const { id } = req.params;
+	const post = await db.findById(id);
+	if (post.length > 0) {
+		try {
+			const deleted = await db.remove(id);
+			res.status(200).json(post);
+		} catch (error) {
+			console.log(error);
+			res.status(500).json({ message: 'The post could not be removed' });
+		}
+	} else {
+		res
+			.status(404)
+			.json({ message: 'The post with the specified ID does not exist.' });
+	}
+});
 
 module.exports = router;
