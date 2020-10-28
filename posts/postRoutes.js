@@ -7,10 +7,10 @@ router.use(express.json()); //configure
 //-----------------------------------------------------------------------------------------//
 //-----------------------------------------------------------------------------------------//
 
-//***TEST***//
-router.get("/", async (req, res) => {
-  res.status(200).json({ ping: "pong" });
-});
+// //***TEST***//
+// router.get("/", async (req, res) => {
+//   res.status(200).json({ ping: "pong" });
+// });
 
 //-----------------------------------------------------------------------------------------//
 
@@ -84,6 +84,64 @@ router.post("/:id/comments", async (req, res) => {
 
 //-----------------------------------------------------------------------------------------//
 
+// GET (ALL POSTS)
+router.get('/', async (req, res) => {
+	try {
+		const posts = await db.find();
+		if (posts.length > 0) {
+			res.status(200).json(posts);
+		} else {
+			res.status(200).json({ message: 'No Posts Yet!' });
+		}
+	} catch (error) {
+		console.log(error);
+		res
+			.status(500)
+			.json({ message: 'The posts information could not be retrieved.' });
+	}
+});
+
+//GET (POST BY ID)
+router.get('/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const post = await db.findById(id);
+		if (post.length > 0) {
+			res.status(200).json(post);
+		} else {
+			res
+				.status(404)
+				.json({ message: 'The post with the specified ID does not exist.' });
+		}
+	} catch (error) {
+		console.log(error);
+		res
+			.status(500)
+			.json({ message: 'The post information could not be retrieved.' });
+	}
+});
+
+//GET (COMMENTS)
+router.get('/:id/comments', async (req, res) => {
+	const { id } = req.params;
+	const post = await db.findById(id);
+
+	if (post.length > 0) {
+		try {
+			const comments = await db.findPostComments(id);
+			res.status(200).json(comments);
+		} catch (error) {
+			console.log(error);
+			res
+				.status(500)
+				.json({ message: 'The comments information could not be retrieved.' });
+		}
+	} else {
+		res
+			.status(404)
+			.json({ message: 'The post with the specified ID does not exist.' });
+	}
+});
 
 
 module.exports = router;
